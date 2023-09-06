@@ -31,6 +31,7 @@ services:
       # console or api domain.
       # example: http://udify.app
       APP_WEB_URL: ''
+      OPENAI_API_BASE: 'https://openai.angular-moon.live/v1'
       # When enabled, migrations will be executed prior to application startup and the application will start after the migrations have completed.
       MIGRATION_ENABLED: 'true'
       # The configurations of postgres database connection.
@@ -137,6 +138,7 @@ services:
       # A secret key that is used for securely signing the session cookie and encrypting sensitive information on the database. You can generate a strong key using `openssl rand -base64 42`.
       # same as the API service
       SECRET_KEY: sk-9f73s3ljTXVcMT3Blb3ljTqtsKiGHXVcMT3BlbkFJLK7U
+      OPENAI_API_BASE: 'https://openai.angular-moon.live/v1'
       # The configurations of postgres database connection.
       # It is consistent with the configuration in the 'db' service below.
       DB_USERNAME: postgres
@@ -205,7 +207,7 @@ services:
     volumes:
       - ./volumes/db/data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
 
   # The redis cache.
   redis:
@@ -237,6 +239,8 @@ services:
       AUTHENTICATION_APIKEY_USERS: 'hello@dify.ai'
       AUTHORIZATION_ADMINLIST_ENABLED: 'true'
       AUTHORIZATION_ADMINLIST_USERS: 'hello@dify.ai'
+    ports:
+      - '8080:8080'
 
   # The nginx reverse proxy.
   # used for reverse proxying the API service and Web service.
@@ -250,4 +254,4 @@ services:
       - api
       - web
     ports:
-      - "80:80"
+      - '80:80'
